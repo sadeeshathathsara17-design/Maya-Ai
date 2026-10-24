@@ -20,6 +20,19 @@ jobs:
           echo "ROOT=$(dirname "$S")" >> "$GITHUB_ENV"
           echo "Project root: $(dirname "$S")"
 
+      - name: Use my photo as the app icon
+        run: |
+          IC=""
+          [ -f icon.png ] && IC=icon.png
+          [ -f icon.jpg ] && IC=icon.jpg
+          if [ -n "$IC" ]; then
+            R="$ROOT/app/src/main/res"
+            rm -f "$R/drawable/ic_launcher.xml"
+            mkdir -p "$R/drawable-nodpi"
+            cp "$IC" "$R/drawable-nodpi/ic_launcher.${IC##*.}"
+            echo "Icon replaced with $IC"
+          fi
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
