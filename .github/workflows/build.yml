@@ -44,4 +44,7 @@ jobs:
       - name: Publish release (download link for your phone)
         uses: softprops/action-gh-release@v2
         with:
-          tag_name:
+          tag_name: maya-latest
+          name: Maya AI (latest build)
+          files: Maya-AI.apk
+          make_latest: true
